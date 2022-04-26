@@ -21,9 +21,8 @@ function createMap(locations) {
     console.log(locations)
     console.log(locations.features.length)
 
-    // Loop through locations, and create the city and state markers.
+    // Loop through locations, and create the earthquke markers.
     for (var i = 0; i < locations.features.length; i++) {
-        // Setting the marker radius for the state by passing population into the markerSize function
         
         latLon = locations.features[i].geometry.coordinates.slice(0,2).reverse()
         depth = locations.features[i].geometry.coordinates[2]
@@ -33,16 +32,16 @@ function createMap(locations) {
         // console.log(depth)
 
         earthquake.push(
-        L.circle(latLon, {
+        L.circleMarker(latLon, {
             stroke: false,
             fillOpacity: 0.75,
             color: getColor(depth),
             // fillColor: "red",
-            radius: mag * 20000
-        })
+            radius: mag * 5
+        }).bindPopup("<h3>" + locations.features[i].properties.title + "<h3><h3>Magnitude: " + mag + "</h3>")
         );
 
-
+        
     }
 
     // Create the base layers.
@@ -101,16 +100,3 @@ legend.addTo(myMap);
 
 }
 
-/*Setup*/
-// var map = L.map("mapid").setView([55.67, 12.57], 7);
-// L.tileLayer(
-//     "https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg"
-// ).addTo(map);
-
-/*Legend specific*/
-
-
-
-
-// Perform an API call to the Citi Bike API to get the station information. Call createMarkers when it completes.
-// d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson").then(createMarkers);
