@@ -15,7 +15,7 @@ function getColor(depth) {
 }
 
 function createMap(locations) {
-    // Define arrays to hold the created city and state markers.
+    // Define arrays to hold the created earthquake markers.
     var earthquake = [];
 
     console.log(locations)
@@ -53,7 +53,7 @@ function createMap(locations) {
         attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
     });
 
-    // Create two separate layer groups: one for the city markers and another for the state markers.
+    // Create a layer group for the earthquake markers.
     var quakes = L.layerGroup(earthquake);
 
 
@@ -82,21 +82,18 @@ function createMap(locations) {
     var legend = L.control({ position: "bottomleft" });
 
     legend.onAdd = function(myMap) {
-    var div = L.DomUtil.create("div", "legend");
-    div.innerHTML += "<h4>Earthquake Depth</h4>";
-    div.innerHTML += '<i style="background: green"></i><span> < 20</span><br>';
-    div.innerHTML += '<i style="background: chartreuse"></i><span> 20 < 40</span><br>';
-    div.innerHTML += '<i style="background: yellow"></i><span>40 < 60</span><br>';
-    div.innerHTML += '<i style="background: orange"></i><span>60 < 80</span><br>';
-    div.innerHTML += '<i style="background: red"></i><span>80+</span><br>';
-    
+        var div = L.DomUtil.create("div", "legend");
+        div.innerHTML += "<h4>Earthquake Depth</h4>";
+        div.innerHTML += '<i style="background: green"></i><span> < 20</span><br>';
+        div.innerHTML += '<i style="background: chartreuse"></i><span> 20 < 40</span><br>';
+        div.innerHTML += '<i style="background: yellow"></i><span>40 < 60</span><br>';
+        div.innerHTML += '<i style="background: orange"></i><span>60 < 80</span><br>';
+        div.innerHTML += '<i style="background: red"></i><span>80+</span><br>';
 
+        return div;
+    };
 
-
-    return div;
-};
-
-legend.addTo(myMap);
+    legend.addTo(myMap);
 
 }
 
